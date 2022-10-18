@@ -26,6 +26,7 @@ public class Spider {
     }
 
     private ArachnidNode createNode(String directory){
+
         ArachnidNode spiderling = new ArachnidNode();
         spiderling.currentFile = new File(directory)            ;
         spiderling.fileName = spiderling.currentFile.getName();
@@ -34,21 +35,25 @@ public class Spider {
         return spiderling;
     }
 
-    public int crawl(ArachnidNode node, String key) {
-        for (File file : node.nextFiles) {
+    public int crawl(ArachnidNode node, String key){
 
-            if (file.getName().equals(key)) {
+        for(File file : node.nextFiles){
+
+            if(file.getName().equals(key)){
                 System.out.print("found: ");
                 System.out.println(file.getName());
                 return 1;
-            } else {
+
+            }else{
 
                 if(file.isDirectory()){
+
                     ArachnidNode spiderling = new ArachnidNode();
                     spiderling.currentFile = file;
                     spiderling.fileName = file.getName();
                     spiderling.nextFiles = file.listFiles();
                     crawl(spiderling, key);
+
                 }
             }
         }

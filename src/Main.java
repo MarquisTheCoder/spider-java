@@ -1,23 +1,25 @@
 package src;
 
 import javax.xml.namespace.QName;
+import java.awt.*;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import javax.swing.*;
 
 
 class Goblin{
-        protected String name;
+        public String name;
         protected double health;
         protected double stamina;
         protected double speed;
         protected double size;
 
         private String defaultGoblin = "glibglob";
-        private double defaultHealth = 40.00;
-        private double defaultStamina = 50.00;
-        private double defaultSpeed = 20.00;
-        private double defaultSize = 10.00;
+        protected double defaultHealth = 40.00;
+        protected double defaultStamina = 50.00;
+        protected double defaultSpeed = 20.00;
+        protected double defaultSize = 10.00;
 
         public Goblin(){
             this.name = defaultGoblin;
@@ -61,6 +63,25 @@ class Goblin{
     }
 
 
+
+class Swindler extends Goblin{
+    public Swindler(){
+        this.name = "Swindler";
+        this.health = super.defaultHealth;
+        this.stamina = super.defaultStamina;
+        this.speed = super.defaultSpeed;
+        this.size = super.defaultSize;
+    }
+}
+
+class Employee{
+    public static String company = "Veridian Dynamics";
+    public String name;
+    public void displayEmployee(){
+        System.out.println(this.name);
+    }
+}
+
 public class Main {
     private static final DateFormat full = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 
@@ -81,11 +102,26 @@ public class Main {
 
     public static void main(String[] args) throws IOException{
         Goblin gargonian = new Goblin("Lustafa");
+        new Goblin("Garbage");
         gargonian.printGoblinData();
         gargonian.name = "Mackeral";
         gargonian.printGoblinData();
         Goblin chicken = new Goblin("Chicken");
         chicken.goblinBattleCry();
-        System.out.println(args[1]);
+        Swindler swindler =  new Swindler();
+        chicken = swindler;
+        chicken.printGoblinData();
+
+        JFrame frame =  new JFrame();
+        JButton goblinAttack = new JButton("Attack Goblin");
+        goblinAttack.setBounds(130,100,100,40);
+        frame.setBackground(Color.decode("#1B1B1B"));
+        JTextArea Type = new JTextArea();
+        Type.setBounds(200,200,200,200);
+        frame.add(goblinAttack);
+        frame.add(Type);
+        frame.setSize(800,500);
+        frame.setVisible(true);
+
     }
 }
